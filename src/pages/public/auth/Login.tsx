@@ -17,7 +17,7 @@ export const LoginPage: React.FC = ( ) =>
 
     return(
         <IonPage>
-            <IonContent>
+            <IonContent fullscreen>
                 <div className="auth-page-container">
                     <IonCard className="auth-container">
                         <IonCardContent>

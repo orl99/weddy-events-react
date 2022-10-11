@@ -1,0 +1,98 @@
+/* Aqua-lib breakpoints */
+  $breakpoint-xsm:374px;
+  $breakpoint-sm: 576px;
+  $breakpoint-md: 768px;
+  $breakpoint-lg: 992px;
+  $breakpoint-xl: 1200px;
+  @mixin xsm {
+      @media screen and (max-width: $breakpoint-xsm) {
+          @content;
+      }
+  }
+
+  @mixin sm {
+      @media screen and (min-width: $breakpoint-sm) {
+          @content;
+      }
+  }
+  
+  
+  @mixin md {
+      @media screen and (min-width: $breakpoint-md) {
+          @content;
+      }
+  }
+  
+  @mixin lg {
+      @media screen and (min-width: $breakpoint-lg) {
+          @content;
+      }
+  }
+  
+  @mixin xl {
+      @media screen and (min-width: $breakpoint-xl) {
+          @content;
+      }
+  }
+  // with landscape
+@mixin xsm-land {
+    @media screen and (max-height : $breakpoint-xsm) {
+        @content;
+    }
+}
+
+@mixin sm-land {
+    @media screen and (min-height : $breakpoint-sm) {
+        @content;
+    }
+}
+@mixin sm-land-max {
+    @media screen and (max-height : 575px) {
+        @content;
+    }
+}
+
+
+@mixin md-land {
+    @media screen and (min-height : $breakpoint-md) {
+        @content;
+    }
+}
+
+@mixin md-land-max {
+    @media screen and (max-height : $breakpoint-md) {
+        @content;
+    }
+}
+
+@mixin lg-land {
+    @media screen and (min-height : $breakpoint-lg) {
+        @content;
+    }
+}
+
+@mixin xl-land {
+    @media screen and (min-height : $breakpoint-xl) {
+        @content;
+    }
+}
+
+
+  
+  @mixin tablet-ipad-lg {
+      @media (min-width: 1025px) and (max-width: 1280px) and (min-height: 1000px) {
+          //CSS
+          @content;
+      }
+  }
+  
+  @mixin tablet-ipad-s {
+      @media (min-width: 768px) and (max-width: 1024px) and (min-height: 1000px) {
+          //CSS
+          @content;
+      }
+      /*
+      ##Device = Tablets, Ipads (portrait)
+      ##Screen = B/w 768px to 1024px
+      */
+  }

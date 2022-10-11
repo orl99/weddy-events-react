@@ -1,0 +1,20 @@
+@import './../../../theme/mediaQueries.scss';
+.verify-main-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100vw;
+    height: 100%;
+}
+
+.verify-qr-container {
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    .qr-container {
+        width: 100%;
+        @include md {
+            width: 400px;
+            height: 400px;
+        }
+    }
+}

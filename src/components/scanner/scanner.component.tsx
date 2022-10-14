@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useZxing } from "react-zxing";
 import './scanner.scss';
 
@@ -22,14 +22,6 @@ export const BarcodeScanner = (props: {start: boolean}) => {
             stop();
         }
     }, [props]);
-
-    // useEffect(() => {
-    //     if(props.start) {
-    //         start();
-    //     } else {
-    //         stop();
-    //     }
-    // }, []);
 
     return (
     <>

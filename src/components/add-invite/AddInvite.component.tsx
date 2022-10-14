@@ -1,10 +1,13 @@
 import { IonItem, IonInput, IonLabel, IonCheckbox, IonButton } from '@ionic/react';
+import { useState } from 'react';
 import { useForm} from 'react-hook-form';
-import { IInvite } from '../../models/invites.model';
+import { IInvite, IInviteForm } from '../../models/invites.model';
+import { qrCodeGenerator } from '../../services/qr-code-generator.service';
 import { saveInvites } from './../../services/http/invites.service';
 
 export const AddInviteComponent = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm<IInvite>();
+    const [qrCodeImg, setQrCodeImg] =  useState<string>();
+    const { register, handleSubmit, formState: { errors } } = useForm<IInviteForm>();
     const onSubmit =  handleSubmit(async(data) =>  {
         const inviteDTO: IInvite=  {
             name: data.name,
@@ -15,9 +18,12 @@ export const AddInviteComponent = () => {
             is_family: data.is_family,
             last_name: data.last_name,
             email: data.email,
+            id: global.crypto.randomUUID()
         };
         console.log(inviteDTO)
 
+        const generatedQRCode = await qrCodeGenerator(inviteDTO.id);
+        setQrCodeImg(generatedQRCode);
         const savedInviteToFirebase = await saveInvites(inviteDTO);
         console.log(savedInviteToFirebase);
     });
@@ -56,6 +62,14 @@ export const AddInviteComponent = () => {
                 </IonItem>
                 <IonButton type='submit'>Guardar</IonButton>
             </form>
+            <>
+            {qrCodeImg ? <img src={qrCodeImg} alt="QR code" />
+                : 
+                (
+                    <></>
+                )
+            }
+            </>
         </>
     )
 }

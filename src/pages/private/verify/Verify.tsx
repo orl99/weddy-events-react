@@ -4,7 +4,7 @@ import { IonPage, IonContent, IonButton} from '@ionic/react';
 import { Header } from "../../../components/header/Header";
 
 import './Verify.scss'
-import { BarcodeScanner } from "../../../components/scanner/scanner.component";
+// import { BarcodeScanner } from "../../../components/scanner/scanner.component";
 
 export const VerifyPage: React.FC = () => {
 
@@ -22,7 +22,7 @@ export const VerifyPage: React.FC = () => {
                         </div>
                         <div className="verify-qr-container">
                             <div className="qr-container">
-                                <BarcodeScanner start={activateScanner}/>
+                                {/* <BarcodeScanner start={activateScanner}/> */}
                             </div>
                         </div>
                         

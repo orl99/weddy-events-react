@@ -1,14 +1,35 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useZxing } from "react-zxing";
 import './scanner.scss';
-export const BarcodeScanner = () => {
+
+
+export const BarcodeScanner = (props: {start: boolean}) => {
+    // const componentWillUnmount = useRef(false)
+
     const [result, setResult] = useState("");
-    const { ref } = useZxing({
-    onResult(result) {
-        setResult(result.getText());
-        console.log('result', result);
-    },
-    });
+    
+    const { ref, start, stop} = useZxing({
+            onResult(result) {
+                setResult(result.getText());
+                console.log('result', result);
+            },
+        });
+    
+    useEffect(() => {
+        if(props.start) {
+            start();
+        } else {
+            stop();
+        }
+    }, [props]);
+
+    // useEffect(() => {
+    //     if(props.start) {
+    //         start();
+    //     } else {
+    //         stop();
+    //     }
+    // }, []);
 
     return (
     <>

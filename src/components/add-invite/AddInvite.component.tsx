@@ -1,34 +1,57 @@
 import { IonItem, IonInput, IonLabel, IonCheckbox, IonButton } from '@ionic/react';
-import { FormEvent } from 'react';
+import { useForm} from 'react-hook-form';
+import { IInvite } from '../../models/invites.model';
+import { saveInvites } from './../../services/http/invites.service';
 
 export const AddInviteComponent = () => {
-    const addInviteFormHandler = (formEvent: FormEvent<HTMLFormElement> | undefined ) => {
-        console.log('formEvent', formEvent);
-        formEvent?.preventDefault();
-        
-    }
+    const { register, handleSubmit, formState: { errors } } = useForm<IInvite>();
+    const onSubmit =  handleSubmit(async(data) =>  {
+        const inviteDTO: IInvite=  {
+            name: data.name,
+            phone_number: data.phone_number,
+            number_of_invites: data.number_of_invites,
+            is_checkin: false,
+            is_confirmed: false,
+            is_family: data.is_family,
+            last_name: data.last_name,
+            email: data.email,
+        };
+        console.log(inviteDTO)
+
+        const savedInviteToFirebase = await saveInvites(inviteDTO);
+        console.log(savedInviteToFirebase);
+    });
 
     return (
         <>
-            <form onSubmit={(event) =>  addInviteFormHandler(event)}>
+            <form onSubmit={(event) => onSubmit(event)}>
                 <IonItem>
                     <IonLabel>Nombre</IonLabel>
-                    <IonInput type='text' name='name' placeholder='Nombre'></IonInput>
+                    <IonInput {...register("name", { required: true })} id='name' type='text' name='name' placeholder='Nombre'></IonInput>
+                    {errors.name && errors.name.type === "required" && <span>El nombre completo es requerido</span>}
                 </IonItem>
                 <IonItem>
                     <IonLabel>Apellidos</IonLabel>
-                    <IonInput type='text' name='lastName' placeholder='Apellidos'></IonInput>
+                    <IonInput {...register("last_name", { required: true })} type='text' name='last_name' placeholder='Apellidos'></IonInput>
+                    {errors.last_name && errors.last_name.type === "required" && <span>Los apellidos son requeridos</span>}
                 </IonItem>
                 <IonItem>
                     <IonLabel>Numero de telefono</IonLabel>
-                    <IonInput type='tel' name='phoneNumber' placeholder='Numero de telefono'></IonInput>
+                    <IonInput {...register("phone_number")} type='tel' name='phone_number' placeholder='Numero de telefono'></IonInput>
+                    {errors.phone_number && errors.phone_number.type === "required" && <span>El numero de telefono es requerido</span>}
+                </IonItem>
+                <IonItem>
+                    <IonLabel>Numero de invitados</IonLabel>
+                    <IonInput {...register("number_of_invites")} type='number' name='number_of_invites' placeholder='0'></IonInput>
+                    {errors.number_of_invites && errors.number_of_invites.type === "required" && <span>El Numero de invitados es requerido</span>}
+
                 </IonItem>
                 <IonItem>
                     <IonLabel>Email</IonLabel>
-                    <IonInput type='email' name='phoneNumber' placeholder='Numero de telefono'></IonInput>
+                    <IonInput {...register("email")} type='email' name='email' placeholder='Email del invitado'></IonInput>
                 </IonItem>
                 <IonItem>
-                    <IonCheckbox slot="start"></IonCheckbox>
+                    <IonCheckbox {...register("is_family")} id="is_family" name="is_family" slot="start"></IonCheckbox>
                     <IonLabel>Es Familia?</IonLabel>
                 </IonItem>
                 <IonButton type='submit'>Guardar</IonButton>

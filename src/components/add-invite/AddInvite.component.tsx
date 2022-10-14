@@ -1,12 +1,13 @@
 import { IonItem, IonInput, IonLabel, IonCheckbox, IonButton } from '@ionic/react';
-import { useState } from 'react';
+import { FC } from 'react';
 import { useForm} from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { IInvite, IInviteForm } from '../../models/invites.model';
-import { qrCodeGenerator } from '../../services/qr-code-generator.service';
-import { saveInvites } from './../../services/http/invites.service';
+import { addCurrentInviteInfo } from '../../redux/Invite.slice';
+import { saveInvite } from './../../services/http/invites.service';
 
-export const AddInviteComponent = () => {
-    const [qrCodeImg, setQrCodeImg] =  useState<string>();
+export const AddInviteComponent: FC = () => {
+    const dispatch = useDispatch();
     const { register, handleSubmit, formState: { errors } } = useForm<IInviteForm>();
     const onSubmit =  handleSubmit(async(data) =>  {
         const inviteDTO: IInvite=  {
@@ -20,12 +21,11 @@ export const AddInviteComponent = () => {
             email: data.email,
             id: global.crypto.randomUUID()
         };
-        console.log(inviteDTO)
-
-        const generatedQRCode = await qrCodeGenerator(inviteDTO.id);
-        setQrCodeImg(generatedQRCode);
-        const savedInviteToFirebase = await saveInvites(inviteDTO);
-        console.log(savedInviteToFirebase);
+        const savedInviteToFirebase = await saveInvite(inviteDTO);
+        if(!!savedInviteToFirebase) {
+            dispatch(addCurrentInviteInfo(inviteDTO));
+            console.log(savedInviteToFirebase);
+        }
     });
 
     return (
@@ -50,7 +50,6 @@ export const AddInviteComponent = () => {
                     <IonLabel>Numero de invitados</IonLabel>
                     <IonInput {...register("number_of_invites")} type='number' name='number_of_invites' placeholder='0'></IonInput>
                     {errors.number_of_invites && errors.number_of_invites.type === "required" && <span>El Numero de invitados es requerido</span>}
-
                 </IonItem>
                 <IonItem>
                     <IonLabel>Email</IonLabel>
@@ -62,14 +61,6 @@ export const AddInviteComponent = () => {
                 </IonItem>
                 <IonButton type='submit'>Guardar</IonButton>
             </form>
-            <>
-            {qrCodeImg ? <img src={qrCodeImg} alt="QR code" />
-                : 
-                (
-                    <></>
-                )
-            }
-            </>
         </>
     )
 }

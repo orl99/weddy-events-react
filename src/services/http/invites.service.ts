@@ -15,7 +15,7 @@ import { IInvite } from '../../models/invites.model';
     const collectionName = 'invites';
 
     // save invites
-    export const saveInvites = async (inviteObj: IInvite) => {
+    export const saveInvite = async (inviteObj: IInvite) => {
         try {
             console.log('inviteObj', inviteObj);
             return addDoc(collection(db, collectionName), inviteObj);

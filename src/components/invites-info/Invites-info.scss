@@ -1,3 +1,22 @@
+ion-title {
+    padding: 0;
+}
 .invites-info-details {
-    padding: 12px;
+    // padding: 12px;
+}
+.invites-info-item-title {
+    font-size: 16px;
+    font-weight: 500;
+}
+.invites-info-item-description {
+    font-size: 16px;
+}
+
+.qr-code-img-container {
+    display: flex;
+    justify-content: center;
+}
+
+.text-center {
+    text-align: center;
 }

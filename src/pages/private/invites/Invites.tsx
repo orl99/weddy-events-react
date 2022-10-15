@@ -1,5 +1,5 @@
 import React from "react";
-import { IonPage, IonContent} from '@ionic/react';
+import { IonPage, IonContent, IonCard, IonCardContent} from '@ionic/react';
 import { Header } from "../../../components/header/Header";
 import { AddInviteComponent } from "../../../components/add-invite/AddInvite.component";
 import { InviteInfoComponent } from "../../../components/invites-info/Invite-info.component";
@@ -13,7 +13,11 @@ export const InvitesPage: React.FC = () => {
             <IonContent fullscreen className="ion-padding">
                 <div className="invites-page-container">
                     <AddInviteComponent/>
-                    <InviteInfoComponent/>
+                    <IonCard>
+                        <IonCardContent>
+                            <InviteInfoComponent/>
+                        </IonCardContent>
+                    </IonCard>
                 </div>
             </IonContent>
         </IonPage>

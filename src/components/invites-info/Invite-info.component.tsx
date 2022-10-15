@@ -36,22 +36,60 @@ export const InviteInfoComponent: FC = () => {
                 (
                     <>
                         <div className="invites-info-container">
-                            <IonTitle>
-                                {currentInviteInfo?.name + ' '} {currentInviteInfo?.last_name}
+                            <IonTitle color={'dark'}>
+                                Datos del Invitado
                             </IonTitle>
                             <div className="invites-info-details">
-                                <IonItem>
-                                    <IonLabel>{currentInviteInfo?.phone_number}</IonLabel>
+                                <IonItem lines='none'>
+                                    <IonLabel>
+                                        <span className='invites-info-item-title'>Nombre: </span>
+                                        <span className='invites-info-item-description'>
+                                            {currentInviteInfo?.name + ' '} {currentInviteInfo?.last_name}
+                                        </span>
+                                    </IonLabel>
                                 </IonItem>
-                                <IonItem>
-                                    <IonLabel>{currentInviteInfo?.number_of_invites}</IonLabel>
+                                <IonItem lines='none'>
+                                    <IonLabel>
+                                        <span className='invites-info-item-title'>Telefono: </span>
+                                        <span className='invites-info-item-description'>
+                                            {currentInviteInfo?.phone_number}
+                                        </span>
+                                    </IonLabel>
                                 </IonItem>
-                                <IonItem>
-                                    <IonLabel>{currentInviteInfo?.email}</IonLabel>
+                                <IonItem lines='none'>
+                                    <IonLabel>
+                                        <span className='invites-info-item-title'>Numero de Invitados: </span>
+                                        <span className='invites-info-item-description'>
+                                            {currentInviteInfo?.number_of_invites}
+                                        </span>
+                                    </IonLabel>
                                 </IonItem>
-                                <IonItem>
+                                <IonItem lines='none'>
+                                    <IonLabel>
+                                        <span className='invites-info-item-title'>Email: </span>
+                                        <span className='invites-info-item-description'>
+                                            {currentInviteInfo?.email}
+                                        </span>
+                                    </IonLabel>
+                                </IonItem>
+                                <IonItem lines='none'>
+                                    <IonLabel>
+                                        <span className='invites-info-item-title'>Es Familia: </span>
+                                        <span className='invites-info-item-description'>
+                                            {currentInviteInfo?.is_family ?
+                                            (<>Si</>) 
+                                            : 
+                                            (<> No</>)   
+                                        }
+                                        </span>
+                                    </IonLabel>
+                                </IonItem>
+                                <IonItem lines='none'>
+                                    <IonLabel className='invites-info-item-title text-center'>Codigo QR del Invitado (Fast Enter)</IonLabel>
+                                </IonItem>
+                                <div className="qr-code-img-container">
                                     {qrCodeImg? (<img src={qrCodeImg} alt="" />) : (<></>)}
-                                </IonItem>
+                                </div>
                             </div>
                         </div>
                     </>

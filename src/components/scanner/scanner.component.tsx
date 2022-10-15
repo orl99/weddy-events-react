@@ -11,7 +11,6 @@ export const BarcodeScanner = (props: {start: boolean}) => {
     const { ref, start, stop} = useZxing({
             onResult(result) {
                 setResult(result.getText());
-                console.log('result', result);
             },
         });
     

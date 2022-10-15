@@ -9,15 +9,60 @@ import {
     doc,
     getDoc,
     getDocs,
+    query,
+    where
     } from "firebase/firestore";
 import { IInvite } from '../../models/invites.model';
 
     const collectionName = 'invites';
 
-    // save invites
+    // Save Invite
     export const saveInvite = async (inviteObj: IInvite) => {
         try {
-            console.log('inviteObj', inviteObj);
+            return addDoc(collection(db, collectionName), inviteObj);
+        } catch (error) {
+            console.error('Firebase Error: ', error);
+        }
+    }
+
+    // Get Invite by Id
+    export const getInviteById = async (uuid: string) => {
+        try {
+            const uniqInvite = await getDoc(doc(db, collectionName, uuid));
+            return uniqInvite;
+        } catch (error) {
+            console.error('Firebase Error: ', error);
+        }
+    }
+
+    // Get Invite by Email
+    export const getInviteByEmail = async (email: string) => {
+        try {
+            const uniqInvite = await getDoc(doc(db, collectionName, email));
+            return uniqInvite;
+        } catch (error) {
+            console.error('Firebase Error: ', error);
+        }
+    }
+
+    // Get Invite by phone number
+    export const getInviteByPhoneNumber = async (phoneNumber: string) => {
+        console.log('phoneNumber', phoneNumber);
+        try {
+            // const uniqInvite = await getDoc(doc(db, collectionName, phoneNumber));
+            const inviteRef = collection(db, collectionName)
+            const inviteQuery = query(inviteRef, where('phone_number',  '==', phoneNumber));
+            const uniqInvite = await getDocs(inviteQuery);
+            return uniqInvite;
+        } catch (error) {
+            console.error('Firebase Error: ', error);
+            return null;
+        }
+    }
+    // Get Invites by Last name
+    // TODO: MAKE IT
+    export const getInviteByLastName = async (inviteObj: IInvite) => {
+        try {
             return addDoc(collection(db, collectionName), inviteObj);
         } catch (error) {
             console.error('Firebase Error: ', error);

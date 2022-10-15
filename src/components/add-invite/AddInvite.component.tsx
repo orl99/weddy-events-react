@@ -4,7 +4,7 @@ import { useForm} from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { IInvite, IInviteForm } from '../../models/invites.model';
 import { addCurrentInviteInfo } from '../../redux/Invite.slice';
-import { saveInvite } from './../../services/http/invites.service';
+import { getInviteByPhoneNumber, saveInvite } from './../../services/http/invites.service';
 
 export const AddInviteComponent: FC = () => {
     const dispatch = useDispatch();
@@ -21,10 +21,23 @@ export const AddInviteComponent: FC = () => {
             email: data.email,
             id: global.crypto.randomUUID()
         };
-        const savedInviteToFirebase = await saveInvite(inviteDTO);
-        if(!!savedInviteToFirebase) {
-            dispatch(addCurrentInviteInfo(inviteDTO));
-            console.log(savedInviteToFirebase);
+        const response = await getInviteByPhoneNumber(inviteDTO.phone_number);
+        let possibleInvites: IInvite[] = [];
+        console.log('response', response);
+        console.log('response', response?.empty);
+        if(!response) {
+            return;
+        }
+        response?.forEach((docsFound) => possibleInvites.push(docsFound.data() as IInvite) );
+        console.log('response?.empty()', response?.empty,  'possibleInvites', possibleInvites);
+        if(response?.empty) {
+            console.log('This is a new Invite');
+            const savedInviteToFirebase = await saveInvite(inviteDTO);
+            if(!!savedInviteToFirebase) {
+                dispatch(addCurrentInviteInfo(inviteDTO));
+            }
+        } else {
+            console.log('Invite all ready exists');
         }
     });
 

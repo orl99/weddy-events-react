@@ -86,13 +86,13 @@ export const InvitationPage: FC<RouteComponentProps<{uuid:string}>> = (props) =>
                                         </div>
                                     </div>
                                     <div className="inv-container-p2">
-                                        <div className="inv-inv2-container">
-                                            <img src="assets/img/inv-2.png" alt="QR Code Invite" />
-                                        </div>
                                         <div className="inv-inv1-container">
                                             <img src="assets/img/inv-1.png" alt="QR Code Invite" />
                                         </div>
-                                        <span className='inv-invite-detail-with-number-of-invites'>{`${inviteInfo.name} ${inviteInfo.last_name}: ${inviteInfo.number_of_invites}`}</span>
+                                        <div className="inv-inv2-container">
+                                            <img src="assets/img/inv-2.png" alt="QR Code Invite" />
+                                        </div>
+                                        <p className='inv-invite-detail-with-number-of-invites text-center'>{`${inviteInfo.name} ${inviteInfo.last_name}: ${inviteInfo.number_of_invites}`}</p>
                                     </div>
                             </div>
                             <div className="inv-confirm">

@@ -10,7 +10,8 @@ import {
     getDoc,
     getDocs,
     query,
-    where
+    where,
+    setDoc
     } from "firebase/firestore";
 import { IInvite } from '../../models/invites.model';
 
@@ -19,16 +20,29 @@ import { IInvite } from '../../models/invites.model';
     // Save Invite
     export const saveInvite = async (inviteObj: IInvite) => {
         try {
-            return addDoc(collection(db, collectionName), inviteObj);
+            const docRef = doc(db, collectionName, inviteObj.id);
+            setDoc(docRef, inviteObj);
+        } catch (error) {
+            console.error('Firebase Error: ', error);
+        }
+    }
+
+    // Confirm Invite
+    export const confirmInvite = async (id: string, confirmInviteAnswer: boolean) => {
+        try {
+            updateDoc(doc(db, collectionName, id), {
+                is_confirmed: confirmInviteAnswer
+            });
         } catch (error) {
             console.error('Firebase Error: ', error);
         }
     }
 
     // Get Invite by Id
-    export const getInviteById = async (uuid: string) => {
+    export const getInviteById = async (id: string) => {
         try {
-            const uniqInvite = await getDoc(doc(db, collectionName, uuid));
+            const docRef = doc(db, collectionName, id);
+            const uniqInvite = await getDoc(docRef);
             return uniqInvite;
         } catch (error) {
             console.error('Firebase Error: ', error);
@@ -47,11 +61,10 @@ import { IInvite } from '../../models/invites.model';
 
     // Get Invite by phone number
     export const getInviteByPhoneNumber = async (phoneNumber: string) => {
-        console.log('phoneNumber', phoneNumber);
         try {
             // const uniqInvite = await getDoc(doc(db, collectionName, phoneNumber));
-            const inviteRef = collection(db, collectionName)
-            const inviteQuery = query(inviteRef, where('phone_number',  '==', phoneNumber));
+            const invitesRef = collection(db, collectionName)
+            const inviteQuery = query(invitesRef, where('phone_number',  '==', phoneNumber));
             const uniqInvite = await getDocs(inviteQuery);
             return uniqInvite;
         } catch (error) {

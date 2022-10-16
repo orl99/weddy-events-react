@@ -21,10 +21,9 @@ export const AddInviteComponent: FC = () => {
             email: data.email,
             id: global.crypto.randomUUID()
         };
+        // TODO: Add condition phone number and uuid
         const response = await getInviteByPhoneNumber(inviteDTO.phone_number);
         let possibleInvites: IInvite[] = [];
-        console.log('response', response);
-        console.log('response', response?.empty);
         if(!response) {
             return;
         }
@@ -32,10 +31,8 @@ export const AddInviteComponent: FC = () => {
         console.log('response?.empty()', response?.empty,  'possibleInvites', possibleInvites);
         if(response?.empty) {
             console.log('This is a new Invite');
-            const savedInviteToFirebase = await saveInvite(inviteDTO);
-            if(!!savedInviteToFirebase) {
-                dispatch(addCurrentInviteInfo(inviteDTO));
-            }
+            await saveInvite(inviteDTO);
+            dispatch(addCurrentInviteInfo(inviteDTO));
         } else {
             console.log('Invite all ready exists');
         }
@@ -69,6 +66,7 @@ export const AddInviteComponent: FC = () => {
                     <IonInput {...register("email")} type='email' name='email' placeholder='Email del invitado'></IonInput>
                 </IonItem>
                 <IonItem>
+                    {/* TODO: FIX CHECKBOX */}
                     <IonCheckbox {...register("is_family")} id="is_family" name="is_family" slot="start"></IonCheckbox>
                     <IonLabel>Es Familia?</IonLabel>
                 </IonItem>

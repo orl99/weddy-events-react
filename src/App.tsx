@@ -34,6 +34,7 @@ import { LoginPage } from './pages/public/auth/Login';
 import { DashboardPage } from './pages/private/dashboard/Dashboard';
 import { VerifyPage } from './pages/private/verify/Verify';
 import { InvitesPage } from './pages/private/invites/Invites';
+import { InvitationPage } from './pages/public/auth/invitation/Invitation.page';
 
 setupIonicReact();
 
@@ -73,6 +74,8 @@ const App: React.FC = () => (
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
+      {/* Invitation Route */}
+      <Route path="/invitation/:uuid" render={(props) => <InvitationPage {...props}/>} />
     </IonReactRouter>
   </IonApp>
 );

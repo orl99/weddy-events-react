@@ -59,7 +59,7 @@ export const InvitationPage: FC<RouteComponentProps<{uuid:string}>> = (props) =>
                                 <p>Aqui tienes mas datos de la boda y la Invitacion virtual</p>
                             </div>
 
-                            <div className="inv-container">
+                            <div className="inv-container-theming inv-container">
                                     <div className="inv-logo-container">
                                         <img src="assets/img/inv-logo.png" alt="QR Code Invite" />
                                     </div>
@@ -71,13 +71,30 @@ export const InvitationPage: FC<RouteComponentProps<{uuid:string}>> = (props) =>
                                     </div>
                                     <div>
                                         <p className='inv-invite-detail-with-number-of-invites'>{`${inviteInfo.name} ${inviteInfo.last_name}: ${inviteInfo.number_of_invites}`}</p>
-
                                     </div>
                                     <div className="inv-qr-code-container">
                                         <img src={QRForInvite} alt="QR Code Invite" />
                                     </div>
                             </div>
-
+                            <div className="inv-container-theming inv-container-desktop">
+                                    <div className="inv-container-p1">
+                                        <div className="inv-logo-container">
+                                            <img src="assets/img/inv-logo.png" alt="QR Code Invite" />
+                                        </div>
+                                        <div className="inv-qr-code-container">
+                                            <img src={QRForInvite} alt="QR Code Invite" />
+                                        </div>
+                                    </div>
+                                    <div className="inv-container-p2">
+                                        <div className="inv-inv2-container">
+                                            <img src="assets/img/inv-2.png" alt="QR Code Invite" />
+                                        </div>
+                                        <div className="inv-inv1-container">
+                                            <img src="assets/img/inv-1.png" alt="QR Code Invite" />
+                                        </div>
+                                        <span className='inv-invite-detail-with-number-of-invites'>{`${inviteInfo.name} ${inviteInfo.last_name}: ${inviteInfo.number_of_invites}`}</span>
+                                    </div>
+                            </div>
                             <div className="inv-confirm">
                                 <p>Para nosotros es muy importante que confirmes tu asistencia, podrias confirmar?</p>
                                 <form onSubmit={(event) => handleInvitationForm(event)}>

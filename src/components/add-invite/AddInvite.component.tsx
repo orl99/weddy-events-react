@@ -31,6 +31,7 @@ export const AddInviteComponent: FC = () => {
         console.log('response?.empty()', response?.empty,  'possibleInvites', possibleInvites);
         if(response?.empty) {
             console.log('This is a new Invite');
+            //TODO: CHECK CHECKBOX
             await saveInvite(inviteDTO);
             dispatch(addCurrentInviteInfo(inviteDTO));
         } else {

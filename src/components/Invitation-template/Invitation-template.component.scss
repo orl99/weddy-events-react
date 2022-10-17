@@ -1,21 +1,10 @@
-@import './../../../../theme/mediaQueries.scss';
-//rgb(246 246 246)
-// #ece9ec
-.inv-greetings-container {
-    text-align: center;
-}
-.inv-main-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #ece9ec;
-}
+@import './../../theme/mediaQueries.scss';
 
 .text-center {
     text-align: center;
 }
 .inv-container-theming {
-    background-image: url('./../../../../../public/assets/img/background-invite.png');
+    background-image: url('./../../../public/assets/img/background-invite.png');
     background-position: -400px;
     background-repeat: no-repeat;
     background-size: cover;
@@ -83,22 +72,4 @@
     @include lg {
         width: 700px;
     }
-}
-.mobileToPrint {
-    width: 160vw !important;
-}
-.deskToPrint {
-    width: 1200px !important;
-}
-.qrToDownload {
-    width: 200px !important;
-    height: 200px !important;
-    img {
-        width: 100% !important;
-        height: 100% !important;
-    }
-}
-.invitationForDownload {
-    position: absolute;
-    top: -200vh;
 }

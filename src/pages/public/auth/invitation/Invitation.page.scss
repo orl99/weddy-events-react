@@ -1,10 +1,10 @@
 @import './../../../../theme/mediaQueries.scss';
-//rgb(246 246 246)
-// #ece9ec
+
 .inv-greetings-container {
     text-align: center;
 }
 .inv-main-container {
+    color: black;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -20,7 +20,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-color: #ECEAF0;
-    border: gold 1px solid;
+    border: gold 2.5px solid;
     border-radius: 5px;
     padding: 16px;
 }
@@ -52,10 +52,17 @@
     }
     .inv-invite-detail-with-number-of-invites {
         margin-bottom: 10px;
+        font-family: 'Open Sans', Courier, monospace;
+        color: rgb(116, 97, 62) !important;
     }
 }
 
 .inv-container-desktop {
+    .inv-invite-detail-with-number-of-invites {
+        margin-bottom: 10px;
+        font-family: Courier, monospace;
+        color: rgb(116, 97, 62) !important;
+    }
     display: none;
     background-position-x: -65px;
     .inv-inv1-container {
@@ -86,9 +93,11 @@
 }
 .mobileToPrint {
     width: 160vw !important;
+    color: black;
 }
 .deskToPrint {
     width: 1200px !important;
+    color: black;
 }
 .qrToDownload {
     width: 200px !important;
@@ -100,5 +109,13 @@
 }
 .invitationForDownload {
     position: absolute;
-    top: -200vh;
+    top: -1000vh;
+}
+
+.inv-not-found {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
 }

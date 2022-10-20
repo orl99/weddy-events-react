@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "wedy-tickets",
+  "private_key_id": "6c8a72e434125d0dfba1b46b6719f9961bb1777e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCvS8O6TfcvnljM\nOvOFCOY3uHcKmpOwr7u8/ppvO7AyFffjwnbF9qLAeu0qZoKUxSPJOjB2KvfWsxE9\nzdO+BqSIDH3yhBnhkjnXAFZhCGch22wDdRWy9pxLXwTfrhn8JDMtqkGSYAbVTRiv\nOPs6L9KP6jIGQ/aFQEZcERhGZ4TVGOGJuxUoaQMoH8X0nfDWgO71h5efWNVCpfPh\naRyaTv1mUK0C/PbloXXVvERIatMauyGpwTJMcxntAS1VGwXE0bnONh8meoPuI+Me\n/qYhUHMkcKp2ZerDi/E1Psn7dhvvPXbhBi38oPV8GYlFGW4/evcBUiwiB9l81zUA\nbSSE9iL/AgMBAAECggEANy+K9uQEpaEcI2+Lqp4anAAeud/gDwfD+sPMqqgH2DzC\nRZm6+qeipSYN9ANBqMRHd9ox14G/dH/7NZHOz0wYEByeqfKckz8Npnoct3+FuErz\nvkLmCelJWxEW37RXyeE7m2y2J/bDL/ONidxOewsDJvt7tC1BNsH9ZI6dLcz5LHya\nCzYlDLLNg5ZfFy3YxliHg4OU4qW4mGN2qvfygKdBj+sRNQsNtSA9NxI+P7ish4Jf\nsfbyxPgzFGJR/tt6Y4IbJvsjVJFNODThJORO4Nn1e5hnN7piyY7zaLNXbpEWE7/v\nB6/2gE0Lk0DZlSPENvnRgb9DHibEkTSnl8GxLEfwQQKBgQD0Fea35XMfr9d8UokS\nrzC1l+7Vrzfwg8lgYt1kWQ/32U1DZWCYeAIaZDTUZZNI4Pxi11eAzdwtwbygEo5c\nOMsrJKHRJAMvemW6nt3lYWRZ0wsikeubXOWMOxtGrWI456lS0AK8Av38EtwP68vN\nn/Ii8v9F3bn9vhj/NfychIj4PQKBgQC32kRUfbnn9Oip8ut5vxIcoNvaxpqmO685\ne2L0M9Llf8D90HriDJGH0p2BuqdYMdFRR9uwJ8vts0ptrfvSW1SxsFm18SMIfzs2\nkuuZrNpzYU4R3egQa0s1iJjXKKYkrpBvA9Ltjf3Ah49OZI2JQyUQEOUnN5M1rY4o\nIxDUdaR/6wKBgQDag4zkTx7MXFCudPlP59TUjWr8k/uhb2nlxzxqLK119m0MDAL5\nHF7Nn64IA9NiaECqgBxPLHyT3iBusY4PE60XN5lCMVpEs+/ErZr7UkBThfMvBLGH\nihfafcPCd1A6n3Jft+bqyEb21y95dWAj+q/8B8zukDyE5B1exMccnC4/BQKBgFhf\nlGTAonH66TN3zvSQgZY9RDDfMksheVK6GpCjsIYcaJoYcljiDbop5QgMvo/IMoNN\ndS4xkvbJLceWz+sHd6iJyjWImXxmHAJZkOInkkHPzgUMk5YA3P/4ju8tXN9ZAZg7\nUFJb5FN9Vccq0lXebpxQYrX9Ise0ixaD9H0Lp2zNAoGAF0gkRiPICx9QeO4hPs4X\nYFWRSPAXEBHY3HaX16jYH3VHXBegOacGq0PDW107X0q0xxVzovqWcJfYyLdzZby8\nuDmN7Ob5yd0+qXHkMphqh6EBviA/UgWQx2JQ1zdPKaRa40A5IJ/k4TYAVlYs2Ins\nLoHBQFsN8NFiuK0EJSWMUcw=\n-----END PRIVATE KEY-----\n",
+  "client_email": "wallet-codelab@wedy-tickets.iam.gserviceaccount.com",
+  "client_id": "111178178529107049696",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/wallet-codelab%40wedy-tickets.iam.gserviceaccount.com"
+}

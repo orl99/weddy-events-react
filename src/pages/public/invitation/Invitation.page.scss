@@ -8,17 +8,54 @@ $primaryColor: #EBE9EC;
 $goldColor: #FFD700;
 .inv-greetings-container {
     text-align: center;
+    background: #d7d7d7;
+    padding: 16px;
+    width: 100vw;
+    margin-bottom: 20px;
+}
+.inv-page {
+    font-family: 'Cardo',serif;
+    width: 100%;
+    height: auto;
+    background-color: #ece9ec;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 54px;
+    padding: 0px 16px;
+}
+.inv-border-desktop {
+    @include md{
+        border: black solid 1px;
+        padding: 16px;
+    }
 }
 .inv-main-container {
+    border: black solid 1px;
     color: black;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #ece9ec;
+    padding: 10px;
+    @include md {
+        padding: 32px;
+    }
+    @include lg {
+        width: 70vw;
+    }
 }
+
+.inv-divider {
+    width: 70%;
+    height: 1px;
+    background: black;
+    margin: 20px 0;
+}
+
 
 .text-center {
     text-align: center;
+    margin-top: 0;
 }
 .inv-container-theming {
     background-image: url('./../../../../public/assets/img/background-invite.png');
@@ -130,6 +167,13 @@ $goldColor: #FFD700;
     align-items: center;
     justify-content: center;
 }
+.inv-not-found {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .inv-form-container {
     display: flex;
@@ -143,7 +187,7 @@ $goldColor: #FFD700;
 }
 
 .inv-confirm-container {
-    margin-top: 20px;
+    // margin-top: 20px;
 }
 
 .inv-download-btn {
@@ -151,19 +195,22 @@ $goldColor: #FFD700;
 }
 
 .inv-footer {
+    margin-top: 20px;
     width: 100vw;
     height: 100px;
     padding: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: white;
+    background-color: black;
 }
 
 .inv-confirm-form-message-container {
     padding: 16px;
     background: $secondaryColorLight;
     border-radius: 10px;
-    margin-top: 10px;
+    // margin-top: 10px;
     max-width: 490px;
     display: flex;
     flex-direction: column;
@@ -196,7 +243,7 @@ $goldColor: #FFD700;
         }
     }
     @include lg {
-        width: 80vw;
+        width: 100%;
         max-width: 1000px;
         grid-template-columns: 0.5fr 1% 1fr;
         grid-template-rows: auto;
@@ -220,6 +267,14 @@ $goldColor: #FFD700;
         align-items: center;
         text-decoration: none;
         color: black;
+        font-size: 14px;
+
+        @include lg {
+            font-size: 11px;
+        }
+        @include xl {
+            font-size: 14px;
+        }
         span {
             margin-right: 5px;
         }
@@ -237,4 +292,54 @@ $goldColor: #FFD700;
 .donate-message {
     width: 80%;
     max-width: 975px;
+}
+
+
+.inv-map-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+}
+.inv-map {
+    width: 100%;
+    height: 500px;
+    border: 3px solid $goldColor;
+    border-radius: 10px;
+}
+
+.inv-names-container {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0px;
+    align-items: center;
+    @include lg {
+        flex-direction: row;
+    }
+    h1, span {
+        text-align: center;
+    }
+}
+
+.amp {
+    text-align: center;
+    font-size: 100px;
+    font-family: 'Playfair Display';
+    @include lg {
+        margin: 0px 10px;
+    }
+}
+
+.header {
+    padding: 16px;
+    width: 100vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    font-family: 'Cardo', serif;
+    color: white;
+    position: fixed;
 }

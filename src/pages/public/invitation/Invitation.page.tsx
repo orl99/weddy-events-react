@@ -3,7 +3,6 @@ import { FC, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { RouteComponentProps } from 'react-router-dom';
 import { IInvite } from '../../../models/invites.model';
-import { renderInvitationToImg } from '../../../services/http/inv.service';
 import { confirmInvite, getInviteById } from '../../../services/http/invites.service';
 import { qrCodeGenerator } from '../../../services/qr-code-generator.service';
 import './Invitation.page.scss'
@@ -107,7 +106,7 @@ export const InvitationPage: FC<RouteComponentProps<{ uuid: string }, StaticCont
                             <IonContent>
                                 <>
                                     <div className="inv-main-container ion-padding">
-                                        <h1 className='text-center'>Bienvenid@ {inviteInfo?.name}</h1>
+                                        <h1 className='text-center'>Bienvenid@ {inviteInfo?.name} {inviteInfo?.last_name}</h1>
                                         <div className="inv-greetings-container">
                                             <p>Nos complace mucho tenerte como una de nuestras Invitad@s para nuestra proxima boda</p>
                                             <p>Aqui tienes mas datos de la boda y la Invitacion virtual</p>

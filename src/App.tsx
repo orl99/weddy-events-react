@@ -34,49 +34,21 @@ import { LoginPage } from './pages/public/auth/Login';
 import { DashboardPage } from './pages/private/dashboard/Dashboard';
 import { VerifyPage } from './pages/private/verify/Verify';
 import { InvitesPage } from './pages/private/invites/Invites';
-import { InvitationPage } from './pages/public/auth/invitation/Invitation.page';
+import { InvitationPage } from './pages/public/invitation/Invitation.page';
+import { PrivatePage } from './pages/private/private.page';
 
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/dashboard">
-            <DashboardPage />
-          </Route>
-          <Route exact path="/login">
-            <LoginPage />
-          </Route>
-          <Route exact path="/verify">
-            <VerifyPage />
-          </Route>
-          <Route path="/invites">
-            <InvitesPage />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/dashboard" />
-          </Route>
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="dashboard" href="/dashboard">
-            <IonIcon icon={triangle} />
-            <IonLabel>Dashboard</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="verify" href="/verify">
-            <IonIcon icon={ellipse} />
-            <IonLabel>Verify</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="invites" href="/invites">
-            <IonIcon icon={square} />
-            <IonLabel>Invites</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-      {/* Invitation Route */}
       <Route path="/invitation/:uuid" render={(props) => <InvitationPage {...props}/>} />
+      {/* <Route path="/invitation" render={(props) => <InvitationPage {...props}/>} /> */}
+      <Route path={'/private'} render={() => <PrivatePage/>}/>
+
+      {/* Invitation Route */}
     </IonReactRouter>
+
   </IonApp>
 );
 

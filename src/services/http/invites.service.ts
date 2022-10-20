@@ -4,8 +4,6 @@ import {
     collection,
     addDoc,
     updateDoc,
-    onSnapshot,
-    deleteDoc,
     doc,
     getDoc,
     getDocs,
@@ -30,11 +28,15 @@ import { IInvite } from '../../models/invites.model';
     // Confirm Invite
     export const confirmInvite = async (id: string, confirmInviteAnswer: boolean) => {
         try {
-            updateDoc(doc(db, collectionName, id), {
+            
+            const docRef = doc(db, collectionName, id);
+            await updateDoc(docRef, {
                 is_confirmed: confirmInviteAnswer
             });
+            return true;
         } catch (error) {
             console.error('Firebase Error: ', error);
+            return false;
         }
     }
 

@@ -1,4 +1,4 @@
-import { IonContent, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonPage } from "@ionic/react";
+import { IonCard, IonContent, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonPage } from "@ionic/react";
 import { FC, useEffect, useState } from "react";
 import { Header } from "../../../components/header/Header";
 import { IInvite } from "../../../models/invites.model";
@@ -45,10 +45,10 @@ export const ListPage: FC = () => {
 export const ListInvitesView: FC<InviteList> = (props: InviteList) => {
 
     return(<>
-        <div className="list-invites-list-container">
+        <IonCard mode="ios" className="list-invites-list-container">
             <IonList>
                 <div className="list-list-header">
-                    <h1 >Lista de invitados</h1>
+                    <h1 >Nombre de invitado</h1>
                     <IonLabel className="list-list-header-item">Confirmado?</IonLabel>
                     <IonLabel className="list-list-header-item">CheckIn?</IonLabel>
                 </div>
@@ -68,6 +68,6 @@ export const ListInvitesView: FC<InviteList> = (props: InviteList) => {
                     ))
                 }
             </IonList>
-        </div>
+        </IonCard>
     </>)
 }

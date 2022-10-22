@@ -32,7 +32,7 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import { LoginPage } from './pages/public/auth/Login';
 import { DashboardPage } from './pages/private/dashboard/Dashboard';
-import { VerifyPage } from './pages/private/verify/Verify';
+import { VerifyPage } from './pages/private/verify/Verify.page';
 import { InvitesPage } from './pages/private/invites/Invites';
 import { InvitationPage } from './pages/public/invitation/Invitation.page';
 import { PrivatePage } from './pages/private/private.page';

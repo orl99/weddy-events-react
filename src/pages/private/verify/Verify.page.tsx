@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { IonPage, IonContent, IonButton} from '@ionic/react';
 import { Header } from "../../../components/header/Header";
 
-import './Verify.scss'
+import './Verify.page.scss'
 // import { BarcodeScanner } from "../../../components/scanner/scanner.component";
 
 export const VerifyPage: React.FC = () => {

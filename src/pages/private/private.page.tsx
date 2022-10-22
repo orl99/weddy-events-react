@@ -5,7 +5,7 @@ import { LoginPage } from "../public/auth/Login"
 import { DashboardPage } from "./dashboard/Dashboard"
 import { InvitesPage } from "./invites/Invites"
 import { ListPage } from "./List/List.page"
-import { VerifyPage } from "./verify/Verify"
+import { VerifyPage } from "./verify/Verify.page"
 
 export const PrivatePage = () => {
     return (

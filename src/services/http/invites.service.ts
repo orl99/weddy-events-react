@@ -51,6 +51,16 @@ import { IInvite } from '../../models/invites.model';
         }
     }
 
+    export const getInvites = async () => {
+        try {
+            const docRef = collection(db, collectionName);
+            const invites = await getDocs(docRef);
+            return invites;
+        } catch (error) {
+            console.error('Firebase Error: ', error);
+        }
+    }
+
     // Get Invite by Email
     export const getInviteByEmail = async (email: string) => {
         try {

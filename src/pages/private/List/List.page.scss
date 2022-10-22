@@ -1,0 +1,17 @@
+.list-list-header {
+    display: grid;
+    grid-template-columns: 1fr 124px 124px;
+    padding: 16px;
+    &-item {
+        text-align: center;
+    }
+    h1 {
+        font-size: 1.2em;
+        margin: 0;
+
+    }
+}
+
+.list-icon {
+    margin: 0 50px;
+}

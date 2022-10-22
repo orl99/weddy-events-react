@@ -1,9 +1,10 @@
 import { IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, IonIcon, IonLabel } from "@ionic/react"
-import { triangle, ellipse, square } from "ionicons/icons"
+import { person, home, qrCodeOutline, list } from "ionicons/icons"
 import { Route, Redirect } from "react-router"
 import { LoginPage } from "../public/auth/Login"
 import { DashboardPage } from "./dashboard/Dashboard"
 import { InvitesPage } from "./invites/Invites"
+import { ListPage } from "./List/List.page"
 import { VerifyPage } from "./verify/Verify"
 
 export const PrivatePage = () => {
@@ -23,22 +24,29 @@ export const PrivatePage = () => {
                     <Route path="/private/invites">
                         <InvitesPage />
                     </Route>
+                    <Route path="/private/list">
+                        <ListPage />
+                    </Route>
                     <Route exact path="/">
                         <Redirect to="/private/dashboard" />
                     </Route>
                 </IonRouterOutlet>
                 <IonTabBar slot="bottom">
                     <IonTabButton tab="dashboard" href="/private/dashboard">
-                        <IonIcon icon={triangle} />
-                        <IonLabel>Dashboard</IonLabel>
+                        <IonIcon icon={home} />
+                        <IonLabel>Home</IonLabel>
                     </IonTabButton>
                     <IonTabButton tab="verify" href="/private/verify">
-                        <IonIcon icon={ellipse} />
-                        <IonLabel>Verify</IonLabel>
+                        <IonIcon icon={qrCodeOutline} />
+                        <IonLabel>Verificacion de Entrada</IonLabel>
                     </IonTabButton>
                     <IonTabButton tab="invites" href="/private/invites">
-                        <IonIcon icon={square} />
-                        <IonLabel>Invites</IonLabel>
+                        <IonIcon icon={person} />
+                        <IonLabel>Registro de Invitados</IonLabel>
+                    </IonTabButton>
+                    <IonTabButton tab="list" href="/private/list">
+                        <IonIcon icon={list} />
+                        <IonLabel>Lista</IonLabel>
                     </IonTabButton>
                 </IonTabBar>
             </IonTabs>

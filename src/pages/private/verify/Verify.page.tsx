@@ -8,9 +8,12 @@ import { BarcodeScanner } from "../../../components/scanner/scanner.component";
 import { checkInInvite, getInviteById } from "../../../services/http/invites.service";
 import { IInvite } from "../../../models/invites.model";
 import { qrCode } from "ionicons/icons";
+import { useSelector } from "react-redux";
 
 
 export const VerifyPage: FC = () => {
+
+    const routing = useSelector<{Routing: string}, string>(state => state.Routing)
 
     const [activateScanner, setScannerStatus] = useState<boolean>(false);
     const [verifyInvite, setVerifyInvite] = useState<IInvite>();
@@ -33,11 +36,16 @@ export const VerifyPage: FC = () => {
             setScannerStatus(true);
         }, 2000);
     }
-    
+
     useEffect(()=> {
-    }, [activateScanner])
-    useEffect(()=> {
-    }, [])
+        if(routing !== 'verify') {
+            setScannerStatus(false);
+        }
+
+    }, [routing])
+
+    useOnPageHidden((pageStatus: boolean) => setScannerStatus(pageStatus))
+
     return(
         <>
             <IonPage>
@@ -63,10 +71,22 @@ export const VerifyPage: FC = () => {
                                 </div>
                                 <div className="verify-line"></div>
                                 <div className="verify-qr-container">
-                                    <div className="qr-container">
-                                        <BarcodeScanner emitBarcodeResult={(result: any) => verifyInviteFunc(result)} start={activateScanner}/>
-                                        <span className="text-center">Pasa el codigo QR para validar invitacion</span>
-                                    </div>
+                                    {
+                                        activateScanner ? <>
+                                            <div className="qr-container">
+                                                <BarcodeScanner emitBarcodeResult={(result: any) => verifyInviteFunc(result)}  start={activateScanner}/>
+                                                <span className="text-center">Pasa el codigo QR para validar invitacion</span>
+                                            </div>
+                                        </>
+                                        : <>
+                                            <div className="qr-off-container">
+                                                <h3>Encender scanner</h3>
+                                                <IonIcon icon={qrCode} ></IonIcon>
+                                                <IonButton onClick={() => setScannerStatus(true)} color={'light'}>Encender</IonButton>
+                                            </div>
+                                        </>
+                                    }
+
                                 </div>
                             </div>
                         </IonCard>
@@ -162,3 +182,48 @@ const beepSound = () => {
         oscillator.disconnect()           
     }, 100);     
 }
+
+
+enum DismissalEvents {
+    VisibilityChange = 'visibilitychange',
+    PageHide = 'pagehide',
+}
+
+const useOnPageHidden = (sideEffectCb: Function) => {
+    useEffect(() => {
+        let terminatingEventSent = false;
+
+        const onHideHandler = ({ type }: Event) => {
+            if (!!terminatingEventSent) {
+                return;
+            }
+
+            if(type === 'pagehide') {
+                terminatingEventSent = true;
+                sideEffectCb(false);
+            }
+
+            if (type === 'visibilitychange' &&
+                document.visibilityState === 'hidden'
+            ) {
+                console.log('come soon')
+                sideEffectCb(false);
+            }
+
+            if (type === 'visibilitychange' &&
+                document.visibilityState === 'visible'
+            ) {
+                console.log('wellcome back')
+                sideEffectCb(true);
+            }
+        };
+
+        document.addEventListener('visibilitychange', onHideHandler);
+        window.addEventListener('pagehide', onHideHandler);
+
+        return () => {
+            document.removeEventListener('visibilitychange', onHideHandler);
+            window.removeEventListener('pagehide', onHideHandler);
+        };
+    }, [sideEffectCb]);
+};

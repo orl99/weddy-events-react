@@ -5,6 +5,16 @@ import { IInvite } from "../../../models/invites.model";
 import { getInvites } from "../../../services/http/invites.service";
 import { checkmarkOutline, banOutline } from "ionicons/icons"
 import './List.page.scss'
+
+// Material table
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import styled from "@emotion/styled";
 interface InviteList  {
     invitesLits: IInvite[]
 }
@@ -43,31 +53,57 @@ export const ListPage: FC = () => {
 
 
 export const ListInvitesView: FC<InviteList> = (props: InviteList) => {
+    const StyledTableRow = styled(TableRow)(({ theme }) => ({
+        '&:nth-of-type(odd)': {
+            backgroundColor: 'whitesmoke',
+        },
+        // hide last border
+        '&:last-child td, &:last-child th': {
+            border: 0,
+        },
+    }));
 
     return(<>
-        <IonCard mode="ios" className="list-invites-list-container">
-            <IonList>
-                <div className="list-list-header">
-                    <h1 >Nombre de invitado</h1>
-                    <IonLabel className="list-list-header-item">Confirmado?</IonLabel>
-                    <IonLabel className="list-list-header-item">CheckIn?</IonLabel>
-                </div>
-                {
-                    props.invitesLits.map((invite) => (
-                        <IonItem key={invite.id}>
-                            <IonLabel>{invite.name} {invite.last_name}</IonLabel>
-                            {invite.is_confirmed ?
-                                <IonIcon class="list-icon" slot="end" icon={checkmarkOutline} />
-                                :  <IonIcon class="list-icon" slot="end" icon={banOutline} />
-                            }
-                            {invite.is_checkin ?
-                                <IonIcon class="list-icon" slot="end" icon={checkmarkOutline} />
-                                :  <IonIcon class="list-icon" slot="end" icon={banOutline} />
-                            }
-                        </IonItem>
-                    ))
-                }
-            </IonList>
-        </IonCard>
+        <div className="list-invites-list-container">
+            <IonCard mode="ios" className="">
+                <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                        <TableHead>
+                        <TableRow>
+                            <TableCell>Nombre</TableCell>
+                            <TableCell align="left">Invitados</TableCell>
+                            <TableCell align="left">Confirmado?</TableCell>
+                            <TableCell align="left">CheckIn?</TableCell>
+                        </TableRow>
+                        </TableHead>
+                        <TableBody>
+                        {props.invitesLits.map((row) => (
+                            <TableRow
+                                key={row.id}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell component="th" scope="row">
+                                    {`${row.name} ${row.last_name}`}
+                                </TableCell>
+                                <TableCell align="left">{row.number_of_invites}</TableCell>
+                                <TableCell align="left">
+                                    {row.is_confirmed ?
+                                        <IonIcon class="list-icon" slot="end" icon={checkmarkOutline} />
+                                        :  <IonIcon class="list-icon" slot="end" icon={banOutline} />
+                                    }
+                                </TableCell>
+                                <TableCell align="left">
+                                    {row.is_checkin ?
+                                        <IonIcon class="list-icon" slot="end" icon={checkmarkOutline} />
+                                        :  <IonIcon class="list-icon" slot="end" icon={banOutline} />
+                                    }
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </IonCard>
+        </div>
     </>)
 }

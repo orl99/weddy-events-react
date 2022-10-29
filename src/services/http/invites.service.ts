@@ -39,6 +39,20 @@ import { IInvite } from '../../models/invites.model';
             return false;
         }
     }
+    // Confirm checkin
+    export const checkInInvite = async (id: string, confirmInviteAnswer: boolean) => {
+        try {
+            
+            const docRef = doc(db, collectionName, id);
+            await updateDoc(docRef, {
+                is_checkin: confirmInviteAnswer
+            });
+            return true;
+        } catch (error) {
+            console.error('Firebase Error: ', error);
+            return false;
+        }
+    }
 
     // Get Invite by Id
     export const getInviteById = async (id: string) => {

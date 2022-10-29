@@ -30,10 +30,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import { LoginPage } from './pages/public/auth/Login';
-import { DashboardPage } from './pages/private/dashboard/Dashboard';
-import { VerifyPage } from './pages/private/verify/Verify.page';
-import { InvitesPage } from './pages/private/invites/Invites';
+import './theme/global.scss';
 import { InvitationPage } from './pages/public/invitation/Invitation.page';
 import { PrivatePage } from './pages/private/private.page';
 

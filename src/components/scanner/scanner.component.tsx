@@ -1,18 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useZxing } from "react-zxing";
 import './scanner.scss';
 
 
-export const BarcodeScanner = (props: {start: boolean}) => {
-    // const componentWillUnmount = useRef(false)
-
-    const [result, setResult] = useState("");
+export const BarcodeScanner = (props: {start: boolean, emitBarcodeResult: Function}) => {
     
     const { ref, start, stop} = useZxing({
-            onResult(result) {
-                setResult(result.getText());
-            },
-        });
+        onResult(result) {
+            props.emitBarcodeResult(result.getText());
+        },
+    });
     
     useEffect(() => {
         if(props.start) {
@@ -25,22 +22,6 @@ export const BarcodeScanner = (props: {start: boolean}) => {
     return (
     <>
         <video className="scanner-video" ref={ref} />
-        <p>
-            <span>Last result:</span>
-            <span>
-                {result ? (
-                    <>
-                        QR Verified
-                    </>
-                )
-                    :(
-                    <>
-                        Could not ready QR code
-                    </>
-                )
-                }
-            </span>
-        </p>
     </>
     );
 };

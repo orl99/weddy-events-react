@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, IonIcon, IonLabel } from "@ionic/react"
 import { person, home, qrCodeOutline, list } from "ionicons/icons"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { Route, Redirect } from "react-router"
 import { setSelectedTab } from "../../redux/Routing.slice"
@@ -18,6 +19,9 @@ export const PrivatePage = () => {
         setActiveTab(selectedTab);
         dispatch(setSelectedTab({selectedTab}));
     }
+    useEffect(()=> {
+        dispatch(setSelectedTab({selectedTab: window.location.pathname.split('/')[2]}))
+    }, []);
     return (
         <>
             <IonTabs>

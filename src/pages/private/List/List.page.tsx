@@ -1,9 +1,9 @@
-import { IonCard, IonContent, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonPage } from "@ionic/react";
+import { IonButton, useIonAlert, IonCard, IonContent, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonPage } from "@ionic/react";
 import { FC, useEffect, useState } from "react";
 import { Header } from "../../../components/header/Header";
 import { IInvite } from "../../../models/invites.model";
-import { getInvites } from "../../../services/http/invites.service";
-import { checkmarkOutline, banOutline } from "ionicons/icons"
+import { checkInInvite, getInvites } from "../../../services/http/invites.service";
+import { checkmarkOutline, banOutline, idCardOutline } from "ionicons/icons"
 import './List.page.scss'
 
 // Material table
@@ -14,7 +14,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import styled from "@emotion/styled";
 interface InviteList  {
     invitesLits: IInvite[]
 }
@@ -53,15 +52,12 @@ export const ListPage: FC = () => {
 
 
 export const ListInvitesView: FC<InviteList> = (props: InviteList) => {
-    const StyledTableRow = styled(TableRow)(({ theme }) => ({
-        '&:nth-of-type(odd)': {
-            backgroundColor: 'whitesmoke',
-        },
-        // hide last border
-        '&:last-child td, &:last-child th': {
-            border: 0,
-        },
-    }));
+
+    const [presentAlert] = useIonAlert();
+
+    const handleCheckIn = async (id: string) => {
+        await checkInInvite(id, true);
+    }
 
     return(<>
         <div className="list-invites-list-container">
@@ -74,6 +70,8 @@ export const ListInvitesView: FC<InviteList> = (props: InviteList) => {
                             <TableCell align="left">Invitados</TableCell>
                             <TableCell align="left">Confirmado?</TableCell>
                             <TableCell align="left">CheckIn?</TableCell>
+                            <TableCell align="left">Invitacion Virtual</TableCell>
+                            <TableCell align="left">CheckIn Invitado</TableCell>
                         </TableRow>
                         </TableHead>
                         <TableBody>
@@ -98,6 +96,31 @@ export const ListInvitesView: FC<InviteList> = (props: InviteList) => {
                                         :  <IonIcon class="list-icon" slot="end" icon={banOutline} />
                                     }
                                 </TableCell>
+                                <TableCell align="left">
+                                    <a href={'https://wedy-tickets.web.app/invitation/' + row.id} target={'_blank'}>
+                                        <IonIcon class="list-icon" slot="end" icon={idCardOutline} />
+                                    </a>
+                                </TableCell>
+                                <TableCell align="left">
+                                    <IonButton onClick={() => presentAlert({
+                                                                header: `Check-In`,
+                                                                message:  `Realizar Check-In a: ${row.name} ${row.last_name}`,
+                                                                buttons: [
+                                                                    {
+                                                                        text: 'Cancelar',
+                                                                        role: 'cancel',
+                                                                    },
+                                                                    {
+                                                                        text: 'Confirmar',
+                                                                        role: 'confirm',
+                                                                        handler: () => {
+                                                                            handleCheckIn(row.id);
+                                                                        },
+                                                                    },
+                                                                ],
+                                                            })}>Check-In</IonButton>
+                                </TableCell>
+
                             </TableRow>
                         ))}
                         </TableBody>

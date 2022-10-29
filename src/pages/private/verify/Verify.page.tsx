@@ -7,13 +7,13 @@ import './Verify.page.scss'
 import { BarcodeScanner } from "../../../components/scanner/scanner.component";
 import { checkInInvite, getInviteById } from "../../../services/http/invites.service";
 import { IInvite } from "../../../models/invites.model";
-import { qrCode } from "ionicons/icons";
+import { alertCircleOutline, qrCode } from "ionicons/icons";
 import { useSelector } from "react-redux";
 
 
 export const VerifyPage: FC = () => {
 
-    const routing = useSelector<{Routing: string}, string>(state => state.Routing)
+    const routing = useSelector<{Routing: {selectedTab: string}}, string>(state => state.Routing.selectedTab);
 
     const [activateScanner, setScannerStatus] = useState<boolean>(false);
     const [verifyInvite, setVerifyInvite] = useState<IInvite>();
@@ -21,15 +21,14 @@ export const VerifyPage: FC = () => {
 
     const verifyInviteFunc = async (id: string) => {
         setScannerStatus(false);
-        beepSound();
         const response = await getInviteById(id);
-        if(response?.exists) {
+        beepSound();
+        if(response?.exists()) {
             const invite: IInvite = response.data() as IInvite;
             (invite.is_checkin) ? invite.is_checkin_text = 'SI':  invite.is_checkin_text = 'NO';
             setVerifyInvite(invite);
             setVerifyState('INVITE-FOUND');
         } else {
-            // not found
             setVerifyState('INVITE-NOT-FOUND');
         }
         setTimeout(()=> {
@@ -99,7 +98,12 @@ export const VerifyPage: FC = () => {
 }
 
 const InviteNotFound: FC = () => {
-    return(<h2>Invitado no encontrado :(</h2>);
+    return(<>
+        <div className="very-first-container">
+            <h2>Invitado no encontrado :(</h2>
+            <IonIcon icon={alertCircleOutline} ></IonIcon>
+        </div>
+    </>);
 }
 
 const InviteFirstState: FC = () => {
@@ -129,7 +133,7 @@ export const InviteInfoDataComponent: FC<{invite: IInvite, emitCheckIn: Function
 
             <IonItem fill="solid">
                 <IonLabel position="floating">Nombre Completo</IonLabel>
-                <IonInput value={`${props?.invite.name}${props.invite.last_name}`} disabled placeholder="Nombre del Invitado"></IonInput>
+                <IonInput value={`${props?.invite.name} ${props.invite.last_name}`} disabled placeholder="Nombre del Invitado"></IonInput>
             </IonItem>
             <IonItem fill="solid">
                 <IonLabel position="floating">ID</IonLabel>
@@ -145,7 +149,7 @@ export const InviteInfoDataComponent: FC<{invite: IInvite, emitCheckIn: Function
             </IonItem>
             <IonItem fill="solid">
                 <IonLabel position="floating">Mesa asignada</IonLabel>
-                <IonInput value={1} disabled type="number" placeholder="Numero de Invitados"></IonInput>
+                <IonInput value={props?.invite.table_number} disabled type="number" placeholder="Numero de Invitados"></IonInput>
             </IonItem>
             {/* Solo si es true */}
             <IonItem fill="solid">
@@ -190,10 +194,16 @@ enum DismissalEvents {
 }
 
 const useOnPageHidden = (sideEffectCb: Function) => {
+    const routing = useSelector<{Routing: {selectedTab: string}}, string>(state => state.Routing.selectedTab);
+
     useEffect(() => {
         let terminatingEventSent = false;
 
         const onHideHandler = ({ type }: Event) => {
+            console.log('routing', routing);
+            if (routing !== 'verify')
+            return;
+
             if (!!terminatingEventSent) {
                 return;
             }
@@ -206,14 +216,12 @@ const useOnPageHidden = (sideEffectCb: Function) => {
             if (type === 'visibilitychange' &&
                 document.visibilityState === 'hidden'
             ) {
-                console.log('come soon')
                 sideEffectCb(false);
             }
 
             if (type === 'visibilitychange' &&
                 document.visibilityState === 'visible'
             ) {
-                console.log('wellcome back')
                 sideEffectCb(true);
             }
         };

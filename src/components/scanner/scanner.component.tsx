@@ -7,9 +7,11 @@ import './scanner.scss';
 export const BarcodeScanner = (props: {start: boolean, emitBarcodeResult: Function}) => {
     
     const { ref, start, stop} = useZxing({
-        onResult(result) {
+        timeBetweenDecodingAttempts: 3000,
+        onResult: (result) => {
             props.emitBarcodeResult(result.getText());
-        },
+            stop();
+        }
     });
     
     useEffect(() => {

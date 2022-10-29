@@ -10,6 +10,7 @@ export interface IInvite {
     phone_number: string;
     id: string;
     is_just_dance?: boolean;
+    table_number?: number;
 }
 export interface IInviteForm {
     email: string;
@@ -22,4 +23,5 @@ export interface IInviteForm {
     number_of_invites: number;
     phone_number: string;
     is_just_dance?: boolean;
+    table_number?: number;
 }

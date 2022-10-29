@@ -68,6 +68,7 @@ export const ListInvitesView: FC<InviteList> = (props: InviteList) => {
                         <TableRow>
                             <TableCell>Nombre</TableCell>
                             <TableCell align="left">Invitados</TableCell>
+                            <TableCell align="left">Mesa</TableCell>
                             <TableCell align="left">Confirmado?</TableCell>
                             <TableCell align="left">CheckIn?</TableCell>
                             <TableCell align="left">Invitacion Virtual</TableCell>
@@ -84,6 +85,7 @@ export const ListInvitesView: FC<InviteList> = (props: InviteList) => {
                                     {`${row.name} ${row.last_name}`}
                                 </TableCell>
                                 <TableCell align="left">{row.number_of_invites}</TableCell>
+                                <TableCell align="left">{row?.table_number}</TableCell>
                                 <TableCell align="left">
                                     {row.is_confirmed ?
                                         <IonIcon class="list-icon" slot="end" icon={checkmarkOutline} />
